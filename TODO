@@ -1,0 +1,2 @@
+add template: conf/tomcat-users.xml as erb to add users
+add template: conf/server.xml as erb to adapt server ports
