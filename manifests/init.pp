@@ -1,6 +1,6 @@
 class tomcat6 (
-    $user = undef,
-    $user_home = undef) {
+    $user = 'tomcat6',
+    $user_home = '/opt/tomcat6') {
     
     class { 'tomcat6::install': user => $user,
                                 user_home => $user_home,
