@@ -20,6 +20,7 @@ class tomcat6::install (
     $tomcat_dest_path = "${user_home}/${tomcat_folder_name}"
     $tomcat_dest_symlink = "${user_home}/tomcat6"
     $tomcat_http_port = "${http_port}"
+    $tomcat_user = { name => "admin", password => "admin", roles => 'tomcat,admin,manager,manager-gui' }
 
     user { $user:
         ensure  => present,
@@ -47,6 +48,12 @@ class tomcat6::install (
         path    => "${tomcat_dest_path}/conf/server.xml",
         ensure  => file,
         content => template("tomcat6/server.xml.erb"),
+    }->
+
+    file { 'tomcat-users.xml':
+        path    => "${tomcat_dest_path}/conf/tomcat-users.xml",
+        ensure  => file,
+        content => template("tomcat6/tomcat-users.xml.erb"),
     }->
 
     file { 'tomcat6-symlink':
