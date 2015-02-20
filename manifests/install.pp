@@ -37,17 +37,9 @@ class tomcat6::install (
         command => "tar xzf ${tomcat_archive_name}",
     }->
 
-    file { 'server.xml':
-        path    => "${tomcat_dest_path}/conf/server.xml",
-        ensure  => file,
-        content => template("tomcat6/server.xml.erb"),
-    }->
-
-    file { 'tomcat-users.xml':
-        path    => "${tomcat_dest_path}/conf/tomcat-users.xml",
-        ensure  => file,
-        content => template("tomcat6/tomcat-users.xml.erb"),
-    }->
+    class { 'tomcat6::configure':
+        tomcat_directory  => "${tomcat_dest_path}",
+    }
 
     file { 'tomcat6_install_symlink':
         ensure  => link,
