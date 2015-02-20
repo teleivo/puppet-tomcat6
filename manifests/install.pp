@@ -9,7 +9,7 @@ class tomcat6::install (
     $tomcat_archive_name = "${tomcat_archive_base}.tar.gz"
 
     $tomcat_base_url = 'http://archive.apache.org/dist/tomcat/tomcat-6/v'
-    $tomcat_url = "${tomcat_base_url}${version}/bin/${tomcat_archive_name}"
+    $tomcat_wget_url = "${tomcat_base_url}${version}/bin/${tomcat_archive_name}"
     $tomcat_dest_path = "${user_home}/${tomcat_archive_base}"
     $tomcat_dest_symlink = "${user_home}/tomcat6"
     $tomcat_http_port = "${http_port}"
@@ -26,7 +26,7 @@ class tomcat6::install (
         user    => "${user}",
         group   => "${user}",
         path    => '/usr/bin',
-        command => "wget ${tomcat_url}",
+        command => "wget ${tomcat_wget_url}",
     }->
 
     exec { 'tomcat6_install_untar':
@@ -57,4 +57,3 @@ class tomcat6::install (
         target  => "${tomcat_dest_path}",
     }
 }
-
