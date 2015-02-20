@@ -5,7 +5,7 @@ class tomcat6 (
     $http_port = '8080',
 ) {
 
-    class { 'tomcat6::install':
+    class { 'tomcat6::install_and_configure':
         version     => $version,
         user        => $user,
         user_home   => $user_home,
