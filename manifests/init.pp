@@ -1,18 +1,21 @@
 class tomcat6 (
     $user = 'tomcat6',
     $user_home = '/opt/tomcat6',
-    $http_port = '8080') {
+    $http_port = '8080',
+) {
 
-    class { 'tomcat6::install': user => $user,
-                                user_home => $user_home,
-                                http_port => $http_port,
+    class { 'tomcat6::install':
+        user => $user,
+        user_home => $user_home,
+        http_port => $http_port,
     }
 }
 
 class tomcat6::install (
-    $user = undef,
-    $user_home = undef,
-    $http_port = undef) {
+    $user,
+    $user_home,
+    $http_port,
+) {
 
     $tomcat_url = 'http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.29/bin/apache-tomcat-6.0.29.tar.gz'
     $tomcat_archive_name = 'apache-tomcat-6.0.29.tar.gz'
@@ -28,7 +31,7 @@ class tomcat6::install (
         managehome => true,
     }->
 
-    exec { 'tomcat6-wget':
+    exec { 'tomcat6_install_wget':
         cwd     => "${user_home}",
         user    => "${user}",
         group   => "${user}",
@@ -36,7 +39,7 @@ class tomcat6::install (
         command => "wget ${tomcat_url}",
     }->
 
-    exec { 'tomcat6-untar':
+    exec { 'tomcat6_install_untar':
         cwd     => "${user_home}",
         user    => "${user}",
         group   => "${user}",
@@ -56,7 +59,7 @@ class tomcat6::install (
         content => template("tomcat6/tomcat-users.xml.erb"),
     }->
 
-    file { 'tomcat6-symlink':
+    file { 'tomcat6_install_symlink':
         ensure  => link,
         owner   => "$user",
         group   => "$user",
