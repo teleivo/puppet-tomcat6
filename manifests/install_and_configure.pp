@@ -21,7 +21,7 @@ class tomcat6::install_and_configure (
         managehome => true,
     }->
 
-    exec { 'tomcat6_install_wget':
+    exec { 'wget_tomcat6':
         cwd     => "${user_home}",
         user    => "${user}",
         group   => "${user}",
@@ -29,7 +29,7 @@ class tomcat6::install_and_configure (
         command => "wget ${tomcat_wget_url}",
     }->
 
-    exec { 'tomcat6_install_untar':
+    exec { 'untar_tomcat6':
         cwd     => "${user_home}",
         user    => "${user}",
         group   => "${user}",
@@ -41,7 +41,7 @@ class tomcat6::install_and_configure (
         tomcat_directory  => "${tomcat_dest_path}",
     }
 
-    file { 'tomcat6_install_symlink':
+    file { 'symlink_tomcat6':
         ensure  => link,
         owner   => "$user",
         group   => "$user",
