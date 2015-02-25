@@ -12,8 +12,8 @@ class tomcat6::install_and_configure (
     $tomcat_wget_url = "${tomcat_base_url}${version}/bin/${tomcat_archive_name}"
     $tomcat_dest_path = "${user_home}/${tomcat_archive_base}"
     $tomcat_dest_symlink = "${user_home}/tomcat6"
-    $tomcat_http_port = "${http_port}"
-    $tomcat_user = { name => "admin", password => "admin", roles => 'tomcat,admin,manager,manager-gui' }
+    $tomcat6_http_port = "${http_port}"
+    $tomcat6_conf_users = { name => "admin", password => "admin", roles => 'tomcat,admin,manager,manager-gui' }
 
     user { $user:
         ensure  => present,
@@ -38,7 +38,8 @@ class tomcat6::install_and_configure (
     }->
 
     class { 'tomcat6::configure':
-        tomcat_directory  => "${tomcat_dest_path}",
+        tomcat6_directory  => "${tomcat_dest_path}",
+        tomcat6_http_port  => "${tomcat6_http_port}",
     }
 
     file { 'symlink_tomcat6':

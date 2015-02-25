@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- BE WARE -->
-<!-- Managed by puppet Class['tomcat6] -->
+<!-- Managed by puppet Class['tomcat6'] -->
 <!-- BE WARE -->
 <!--
   Licensed to the Apache Software Foundation (ASF) under one or more
@@ -36,5 +36,5 @@
   <user username="both" password="tomcat" roles="tomcat,role1"/>
   <user username="role1" password="tomcat" roles="role1"/>
 -->
-  <user username="<%= @tomcat_user['name'] %>" password="<%= @tomcat_user['password'] %>" roles="<%= @tomcat_user['roles'] %>"/>
+  <user username="<%= @tomcat6_conf_users['name'] %>" password="<%= @tomcat6_conf_users['password'] %>" roles="<%= @tomcat6_conf_users['roles'] %>"/>
 </tomcat-users>
