@@ -3,6 +3,7 @@ class tomcat6::install_and_configure (
     $user,
     $user_home,
     $http_port,
+    $java_opts,
 ) {
 
     $tomcat_archive_base = "apache-tomcat-${version}"
@@ -57,6 +58,7 @@ class tomcat6::install_and_configure (
         tomcat6_user        => "${user}",
         tomcat6_home_path   => "${tomcat_dest_path}",
         tomcat6_lib_path    => "${tomcat_dest_path}",
+        tomcat6_java_opts   => "${java_opts}",
         require             => Class['tomcat6::configure'],
     }
 }

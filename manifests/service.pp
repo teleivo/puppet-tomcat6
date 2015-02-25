@@ -2,6 +2,7 @@ class tomcat6::service (
     $tomcat6_user,
     $tomcat6_home_path,
     $tomcat6_lib_path,
+    $tomcat6_java_opts,
 ) {
 
     $initd_script_name = "tomcat6"
