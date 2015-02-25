@@ -1,2 +1,7 @@
-add template: conf/tomcat-users.xml as erb to add users
-add template: conf/server.xml as erb to adapt server ports
+-do not download tomcat tarball repeatedly
+-add CATALINA_HOME to /etc/environment (optional)
+-check how /etc/init.d/tomcat6 affects catalina.policy
+ it assumes we installed tomcat6 from packages which we did not.
+ so mismatch in paths when installing from tarball
+-add examples/comments on howto use the module
+ especially regarding the tomcat_users array/hash structure
