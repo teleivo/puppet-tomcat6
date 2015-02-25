@@ -1,7 +1,7 @@
 class tomcat6::configure (
     $tomcat6_directory,
     $tomcat6_http_port,
-    $tomcat6_conf_users,
+    $tomcat6_conf_users = undef,
 ) {
 
     file { 'server.xml':

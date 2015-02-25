@@ -36,5 +36,7 @@
   <user username="both" password="tomcat" roles="tomcat,role1"/>
   <user username="role1" password="tomcat" roles="role1"/>
 -->
+  <%- if @tomcat6_conf_users -%>
   <user username="<%= @tomcat6_conf_users['name'] %>" password="<%= @tomcat6_conf_users['password'] %>" roles="<%= @tomcat6_conf_users['roles'] %>"/>
+  <%- end -%>
 </tomcat-users>
