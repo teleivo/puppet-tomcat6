@@ -41,4 +41,22 @@ class tomcat6::install_and_configure (
         tomcat6_http_port  => "${tomcat6_http_port}",
     }
 
+    if ($version == '6.0.29') {
+        file { "${tomcat_dest_path}/bin/catalina.sh":
+            ensure  => file,
+            owner   => "$user",
+            group   => "$user",
+            mode    => 755,
+            source  => "puppet:///modules/tomcat6/catalina.sh",
+            require => Exec['untar_tomcat6'],
+            before  => Class['tomcat6::service'],
+        }
+    }
+
+    class { 'tomcat6::service':
+        tomcat6_user        => "${user}",
+        tomcat6_home_path   => "${tomcat_dest_path}",
+        tomcat6_lib_path    => "${tomcat_dest_path}",
+        require             => Class['tomcat6::configure'],
+    }
 }
