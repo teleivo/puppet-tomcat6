@@ -2,10 +2,10 @@ class tomcat6::install (
     $version,
     $user,
     $user_home,
-    $tomcat_archive_base,
-    $tomcat_dest_path,
+    $tomcat6_archive_basename,
+    $tomcat6_home_path,
 ) {
-    $tomcat_archive_name = "${tomcat_archive_base}.tar.gz"
+    $tomcat_archive_name = "${tomcat6_archive_basename}.tar.gz"
     $tomcat_base_url = 'http://archive.apache.org/dist/tomcat/tomcat-6/v'
     $tomcat_wget_url = "${tomcat_base_url}${version}/bin/${tomcat_archive_name}"
 
@@ -32,7 +32,7 @@ class tomcat6::install (
     }
 
     if ($version == '6.0.29') {
-        file { "${tomcat_dest_path}/bin/catalina.sh":
+        file { "${tomcat6_home_path}/bin/catalina.sh":
             ensure  => file,
             owner   => "$user",
             group   => "$user",
