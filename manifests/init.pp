@@ -9,7 +9,7 @@ class tomcat6 (
     $tomcat_archive_base = "apache-tomcat-${version}"
     $tomcat_dest_path = "${user_home}/${tomcat_archive_base}"
 
-    class { 'tomcat6::install_and_configure':
+    class { 'tomcat6::install':
         version             => $version,
         user                => $user,
         user_home           => $user_home,

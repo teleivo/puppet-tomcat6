@@ -1,4 +1,4 @@
-class tomcat6::install_and_configure (
+class tomcat6::install (
     $version,
     $user,
     $user_home,
