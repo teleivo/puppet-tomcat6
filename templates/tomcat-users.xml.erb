@@ -37,6 +37,8 @@
   <user username="role1" password="tomcat" roles="role1"/>
 -->
   <%- if @tomcat6_conf_users -%>
-  <user username="<%= @tomcat6_conf_users['name'] %>" password="<%= @tomcat6_conf_users['password'] %>" roles="<%= @tomcat6_conf_users['roles'] %>"/>
+    <%- @tomcat6_conf_users.each do |user| -%>
+  <user username="<%= user['name'] %>" password="<%= user['password'] %>" roles="<%= user['roles'] %>"/>
+    <%- end -%>
   <%- end -%>
 </tomcat-users>
