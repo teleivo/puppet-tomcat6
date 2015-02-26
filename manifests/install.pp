@@ -15,7 +15,7 @@ class tomcat6::install (
         managehome  => true,
     }->
 
-    exec { 'wget_tomcat6':
+    exec { "wget_${tomcat_archive_name}":
         cwd     => $user_home,
         user    => $user,
         group   => $user,
@@ -23,7 +23,7 @@ class tomcat6::install (
         command => "wget ${tomcat_wget_url}",
     }->
 
-    exec { 'untar_tomcat6':
+    exec { "untar_${tomcat_archive_name}":
         cwd     => $user_home,
         user    => $user,
         group   => $user,
@@ -38,7 +38,7 @@ class tomcat6::install (
             group   => $user,
             mode    => 755,
             source  => "puppet:///modules/tomcat6/catalina.sh",
-            require => Exec['untar_tomcat6'],
+            require => Exec["untar_${tomcat_archive_name}"],
         }
     }
 }
