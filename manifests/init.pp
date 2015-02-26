@@ -3,7 +3,7 @@ class tomcat6 (
     $user = 'tomcat6',
     $user_home = '/opt/tomcat6',
     $http_port = '8080',
-    $java_opts = '-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC',
+    $java_opts = ['-Djava.awt.headless=true', '-Xmx128m', '-XX:+UseConcMarkSweepGC'],
     $tomcat_users = undef,
 ) {
     $tomcat6_archive_basename = "apache-tomcat-${version}"
