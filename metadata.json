@@ -1,0 +1,24 @@
+{
+  "name": "teleivo-tomcat6",
+  "version": "0.1.0",
+  "author": "teleivo",
+  "summary": "Installs, configures, and manages tomcat6.",
+  "license": "Apache-2.0",
+  "source": "git://github.com/teleivo/puppet-tomcat6.git",
+  "project_page": "https://github.com/teleivo/puppet-tomcat6",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "description": "Module for tomcat 6 configuration",
+}
