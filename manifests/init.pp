@@ -25,7 +25,7 @@ class tomcat6 (
         require => Class['tomcat6::staging'],
     }
 
-    class { 'tomcat6::configure':
+    class { 'tomcat6::config':
         tomcat6_home_path  => $home_path,
         tomcat6_http_port  => $http_port,
         tomcat6_conf_users => $tomcat_users,
@@ -37,6 +37,6 @@ class tomcat6 (
         tomcat6_home_path   => $home_path,
         tomcat6_lib_path    => $home_path,
         tomcat6_java_opts   => $java_opts,
-        require            => Class['tomcat6::configure'],
+        require            => Class['tomcat6::config'],
     }
 }

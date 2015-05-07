@@ -1,4 +1,4 @@
-class tomcat6::configure (
+class tomcat6::config (
     $tomcat6_home_path,
     $tomcat6_http_port,
     $tomcat6_conf_users = undef,
