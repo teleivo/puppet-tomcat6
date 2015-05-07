@@ -26,17 +26,10 @@ class tomcat6 (
     }
 
     class { 'tomcat6::config':
-        tomcat6_home_path  => $home_path,
-        tomcat6_http_port  => $http_port,
-        tomcat6_conf_users => $tomcat_users,
-        require            => Class['tomcat6::install'],
+        require => Class['tomcat6::install'],
     }
 
     class { 'tomcat6::service':
-        tomcat6_user        => $user,
-        tomcat6_home_path   => $home_path,
-        tomcat6_lib_path    => $home_path,
-        tomcat6_java_opts   => $java_opts,
-        require            => Class['tomcat6::config'],
+        require => Class['tomcat6::config'],
     }
 }
