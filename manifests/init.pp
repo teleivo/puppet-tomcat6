@@ -6,27 +6,37 @@ class tomcat6 (
     $java_opts = ['-Djava.awt.headless=true', '-Xmx128m', '-XX:+UseConcMarkSweepGC'],
     $tomcat_users = undef,
 ) {
-    $tomcat6_archive_basename = "apache-tomcat-${version}"
-    $tomcat6_home_path = "${user_home}/${tomcat6_archive_basename}"
+    $archive_basename = "apache-tomcat-${version}"
+    $home_path = "${user_home}/${archive_basename}"
+    $staging_dir = "${user_home}/staging/"
+    $staging_home_path = "${staging_dir}${archive_basename}"
+
+    user { $user:
+        ensure      => present,
+        home        => $user_home,
+        managehome  => true,
+    }
+
+    class { 'tomcat6::staging':
+        require => User["$user"],
+    }
 
     class { 'tomcat6::install':
-        version                  => $version,
-        user                     => $user,
-        user_home                => $user_home,
-        tomcat6_archive_basename => $tomcat6_archive_basename,
-        tomcat6_home_path        => $tomcat6_home_path,
-    }->
+        require => Class['tomcat6::staging'],
+    }
 
     class { 'tomcat6::configure':
-        tomcat6_home_path  => $tomcat6_home_path,
+        tomcat6_home_path  => $home_path,
         tomcat6_http_port  => $http_port,
         tomcat6_conf_users => $tomcat_users,
-    }->
+        require            => Class['tomcat6::install'],
+    }
 
     class { 'tomcat6::service':
         tomcat6_user        => $user,
-        tomcat6_home_path   => $tomcat6_home_path,
-        tomcat6_lib_path    => $tomcat6_home_path,
+        tomcat6_home_path   => $home_path,
+        tomcat6_lib_path    => $home_path,
         tomcat6_java_opts   => $java_opts,
+        require            => Class['tomcat6::configure'],
     }
 }
