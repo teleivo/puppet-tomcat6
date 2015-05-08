@@ -4,10 +4,10 @@ class tomcat6::staging (
     $tomcat_base_url = 'http://archive.apache.org/dist/tomcat/tomcat-6/v'
     $tomcat_source_url = "${tomcat_base_url}${tomcat6::version}/bin/${tomcat_archive_name}"
 
-    class { '::staging':
-        path  => $tomcat6::staging_dir,
-        owner => $tomcat6::user,
-        group => $tomcat6::user,
+    file { $tomcat6::staging_dir:
+        ensure => directory,
+        owner  => $tomcat6::user,
+        group  => $tomcat6::user,
     }
 
     staging::deploy { $tomcat_archive_name:
@@ -15,6 +15,7 @@ class tomcat6::staging (
         target => $tomcat6::staging_dir,
         user   => $tomcat6::user,
         group  => $tomcat6::user,
+        require => File["${tomcat6::staging_dir}"],
     }
 
     if ($tomcat6::version == '6.0.29') {
