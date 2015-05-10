@@ -18,7 +18,7 @@ class tomcat6 (
     }
 
     class { 'tomcat6::staging':
-        require => User["$user"],
+        require => User[$user],
     }
 
     class { 'tomcat6::install':

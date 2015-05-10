@@ -11,11 +11,11 @@ class tomcat6::staging (
     }
 
     staging::deploy { $tomcat_archive_name:
-        source => $tomcat_source_url,
-        target => $tomcat6::staging_dir,
-        user   => $tomcat6::user,
-        group  => $tomcat6::user,
-        require => File["${tomcat6::staging_dir}"],
+        source  => $tomcat_source_url,
+        target  => $tomcat6::staging_dir,
+        user    => $tomcat6::user,
+        group   => $tomcat6::user,
+        require => File[$tomcat6::staging_dir],
     }
 
     if ($tomcat6::version == '6.0.29') {
@@ -23,9 +23,9 @@ class tomcat6::staging (
             ensure  => file,
             owner   => $tomcat6::user,
             group   => $tomcat6::user,
-            mode    => 755,
-            source  => "puppet:///modules/tomcat6/catalina.sh",
-            require => Staging::Deploy["$tomcat_archive_name"],
+            mode    => '0755',
+            source  => 'puppet:///modules/tomcat6/catalina.sh',
+            require => Staging::Deploy[$tomcat_archive_name],
         }
     }
 }
